@@ -1,7 +1,7 @@
 // Inicializácia Supabase (Nahraď svojimi údajmi zo Supabase projektu)
 const SUPABASE_URL = "https://vjvdpkreqgvrpcgycccm.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZqdmRwa3JlcWd2cnBjZ3ljY2NtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjc1MzQsImV4cCI6MjA5MzgwMzUzNH0.18Xl6ihYBND3-YH_4YraJXuYkZpcLYCWZFbxMaITR0g";
-const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Databáza 10 unikátnych cvikov pre každú partiu
 const defaultExercises = {
