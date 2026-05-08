@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majner Fitness Science & Training Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="glow"></div>
+
+    <nav class="app-nav">
+        <span class="logo">Majner Fitness</span>
+        <div class="nav-links">
+            <button class="nav-tab active" data-target="studies-section">Štúdie</button>
+            <button class="nav-tab" data-target="training-section">Môj Tréning</button>
+        </div>
+        <div class="auth-btn-container">
+            <button id="authBtn" class="apple-btn-primary">Prihlásiť sa</button>
+        </div>
+    </nav>
+
+    <section id="studies-section" class="tab-content active">
+        <header>
+            <p class="author">Made with passion by Majner</p>
+            <h1>Get better everyday</h1>
+        </header>
+
+        <div class="nav-container">
+            <input type="text" id="search" placeholder="Hľadať v 50+ štúdiách (Kreatín, Hypertrofia, Spánok...)">
+            <div class="filters" id="filterContainer">
+                <button class="f-btn active" data-cat="all">Všetko</button>
+                <button class="f-btn" data-cat="suplementy">Suplementy</button>
+                <button class="f-btn" data-cat="trening">Tréning</button>
+                <button class="f-btn" data-cat="strava">Strava</button>
+                <button class="f-btn" data-cat="regeneracia">Regenerácia</button>
+            </div>
+        </div>
+
+        <main class="grid" id="grid"></main>
+    </section>
+
+    <section id="training-section" class="tab-content">
+        <div id="lockScreen" class="lock-overlay">
+            <div class="lock-card">
+                <h2>Odomkni svoj progres</h2>
+                <p>Prihlás sa, aby si mohol zapisovať tréningy, vytvárať vlastné cviky a sledovať grafy tvojho 1RM.</p>
+                <button onclick="openAuthModal()" class="apple-btn-blue">Prihlásiť sa teraz</button>
+            </div>
+        </div>
+
+        <div class="training-dashboard">
+            <div class="bento-container">
+                <div class="bento-box log-workout">
+                    <h2>Zaznamenať Sériu</h2>
+                    <div class="input-group">
+                        <label>Svalová partia</label>
+                        <select id="partSelect">
+                            <option value="Hrudník">Hrudník</option>
+                            <option value="Chrbát">Chrbát</option>
+                            <option value="Nohy">Nohy</option>
+                            <option value="Ramená">Ramená</option>
+                            <option value="Ruky">Ruky</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Cvik</label>
+                        <select id="exerciseSelect"></select>
+                    </div>
+
+                    <div class="custom-exercise-inline">
+                        <input type="text" id="customExName" placeholder="Názov vlastného cviku">
+                        <button id="addCustomExBtn" class="apple-btn-secondary">Pridať</button>
+                    </div>
+
+                    <div class="sets-inputs">
+                        <input type="number" id="weightInput" placeholder="Váha (kg)">
+                        <input type="number" id="repsInput" placeholder="Opakovania">
+                        <input type="number" id="rpeInput" placeholder="RPE (1-10)" step="0.5" min="1" max="10">
+                    </div>
+
+                    <button id="saveSetBtn" class="apple-btn-blue font-bold">Uložiť sériu</button>
+                </div>
+
+                <div class="bento-box analytics">
+                    <h2>Sledovanie Progressu</h2>
+                    <div class="chart-controls">
+                        <select id="chartExerciseSelect"></select>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="authModal">
+        <div class="modal-content auth-content">
+            <span class="close-btn" id="closeAuth">&times;</span>
+            <h2 id="authModalTitle">Prihlásenie</h2>
+            <form id="authForm">
+                <input type="email" id="authEmail" placeholder="E-mail" required>
+                <input type="password" id="authPassword" placeholder="Heslo" required>
+                <button type="submit" id="authSubmit" class="apple-btn-blue">Prihlásiť sa</button>
+            </form>
+            <p id="authToggleText">Nemáš účet? <span id="authToggle" class="link">Zaregistruj sa</span></p>
+        </div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
